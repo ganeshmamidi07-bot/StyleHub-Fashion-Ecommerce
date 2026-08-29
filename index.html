@@ -1,0 +1,1999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StyleHub | Premium Fashion & Apparel</title>
+  <meta name="description" content="Discover luxury fashion, seasonal collections, and timeless styles for Men, Women, and Kids at StyleHub.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="top-announcement-bar" id="announcement-bar">
+    <div class="container announcement-inner">
+      <div class="announcement-text">
+        ✨ <strong>SPRING EDIT 2026:</strong> Use code <span class="badge-promo">STYLE40</span> for 40% OFF | Free Express Shipping on Orders Over ₹1,499
+      </div>
+      <div class="top-bar-actions">
+        <select id="currency-select" class="top-select" aria-label="Select Currency">
+          <option value="INR" selected>₹ INR</option>
+        </select>
+        <button type="button" class="top-bar-link" id="top-track-btn" onclick="navigateTo('account'); setAccountTab('orders');">Track Order</button>
+        <button type="button" class="top-bar-link" id="top-help-btn" onclick="navigateTo('contact')">Need Help?</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN HEADER / NAVBAR -->
+  <header class="main-header" id="main-header">
+    <div class="container header-container">
+      <!-- Mobile Menu Toggle Button -->
+      <button type="button" class="mobile-toggle-btn" id="mobile-menu-btn" aria-label="Toggle Navigation Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <!-- Brand Logo -->
+      <a href="#" class="brand-logo" id="brand-logo-link" onclick="navigateTo('home'); return false;">
+        <span class="logo-accent">STYLE</span>HUB
+        <span class="logo-dot"></span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="main-nav" id="main-navigation">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#home" class="nav-link active" data-view="home">Home</a></li>
+          <li class="nav-item"><a href="#shop" class="nav-link" data-view="shop" data-filter="all">All Styles</a></li>
+          <li class="nav-item"><a href="#women" class="nav-link" data-view="shop" data-filter="women">Women</a></li>
+          <li class="nav-item"><a href="#men" class="nav-link" data-view="shop" data-filter="men">Men</a></li>
+          <li class="nav-item"><a href="#kids" class="nav-link" data-view="shop" data-filter="kids">Kids</a></li>
+          <li class="nav-item"><a href="#about" class="nav-link" data-view="about">Our Story</a></li>
+          <li class="nav-item"><a href="#contact" class="nav-link" data-view="contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Header Action Icons -->
+      <div class="header-actions">
+        <!-- Live Search Bar -->
+        <div class="header-search-wrapper" id="search-container">
+          <button type="button" class="search-icon-btn" id="search-trigger-btn" aria-label="Search Catalog">
+            🔍
+          </button>
+          <input type="text" id="global-search-input" class="header-search-input" placeholder="Search dresses, jackets, shirts..." autocomplete="off">
+          <button type="button" class="search-clear-btn" id="search-clear-btn" style="display:none;">✕</button>
+          <!-- Search Results Dropdown -->
+          <div class="search-results-dropdown" id="search-results-dropdown" style="display: none;"></div>
+        </div>
+
+        <!-- Wishlist Button with Badge -->
+        <button type="button" class="action-icon-btn" id="header-wishlist-btn" title="View Wishlist" onclick="openWishlistModal()">
+          <span class="icon">🤍</span>
+          <span class="badge" id="wishlist-counter">0</span>
+        </button>
+
+        <!-- Cart Button with Badge -->
+        <button type="button" class="action-icon-btn" id="header-cart-btn" title="View Cart" onclick="toggleCartDrawer()">
+          <span class="icon">🛍️</span>
+          <span class="badge" id="cart-counter">0</span>
+        </button>
+
+        <!-- User Profile Button -->
+        <button type="button" class="action-icon-btn" id="header-account-btn" title="My Account" onclick="handleAccountClick()">
+          <span class="icon">👤</span>
+          <span class="user-greeting-label" id="user-greeting-label">Account</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Nav -->
+    <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+      <div class="mobile-nav-header">
+        <span class="brand-logo"><span class="logo-accent">STYLE</span>HUB</span>
+        <button type="button" class="close-btn" id="close-mobile-nav">✕</button>
+      </div>
+      <div class="mobile-nav-search">
+        <input type="text" id="mobile-search-input" placeholder="Search products..." onkeyup="handleMobileSearch(event)">
+      </div>
+      <ul class="mobile-nav-list">
+        <li><a href="#" onclick="navigateTo('home'); closeMobileNav(); return false;">🏠 Home</a></li>
+        <li><a href="#" onclick="filterShopCategory('all'); closeMobileNav(); return false;">👗 All Catalog</a></li>
+        <li><a href="#" onclick="filterShopCategory('women'); closeMobileNav(); return false;">✨ Women Collection</a></li>
+        <li><a href="#" onclick="filterShopCategory('men'); closeMobileNav(); return false;">👔 Men Collection</a></li>
+        <li><a href="#" onclick="filterShopCategory('kids'); closeMobileNav(); return false;">🧸 Kids Collection</a></li>
+        <li><a href="#" onclick="openWishlistModal(); closeMobileNav(); return false;">🤍 My Wishlist (<span class="mobile-wish-count">0</span>)</a></li>
+        <li><a href="#" onclick="navigateTo('cart'); closeMobileNav(); return false;">🛍️ Shopping Cart (<span class="mobile-cart-count">0</span>)</a></li>
+        <li><a href="#" onclick="handleAccountClick(); closeMobileNav(); return false;">👤 User Account</a></li>
+        <li><a href="#" onclick="navigateTo('about'); closeMobileNav(); return false;">📖 About StyleHub</a></li>
+        <li><a href="#" onclick="navigateTo('contact'); closeMobileNav(); return false;">💬 Contact Us</a></li>
+      </ul>
+      <div class="mobile-nav-footer">
+        <p>Premium Luxury Fashion for Everyone</p>
+      </div>
+    </div>
+    <div class="mobile-backdrop" id="mobile-backdrop" onclick="closeMobileNav()"></div>
+  </header>
+
+  <!-- MAIN APP CONTAINER -->
+  <main id="app-main-content">
+
+    <!-- ============================================== -->
+    <!-- 1. HOME VIEW -->
+    <!-- ============================================== -->
+    <section class="app-view active-view" id="home-view">
+      
+      <!-- HERO BANNER SECTION -->
+      <section class="hero-section">
+        <div class="hero-slider-track">
+          <div class="hero-slide active-slide" style="background-image: linear-gradient(to right, rgba(26,26,46,0.85) 0%, rgba(26,26,46,0.3) 100%), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop');">
+            <div class="container hero-content">
+              <span class="hero-badge">NEW SEASON 2026</span>
+              <h1 class="hero-title">Elegance in Every Stitch</h1>
+              <p class="hero-subtitle">Redefine your wardrobe with contemporary silhouettes, sustainable fabrics, and handcrafted luxury aesthetics.</p>
+              <div class="hero-cta-group">
+                <button type="button" class="btn btn-primary" onclick="filterShopCategory('all')">Explore Collection</button>
+                <button type="button" class="btn btn-outline" onclick="filterShopCategory('women')">Women's Edit</button>
+                <button type="button" class="btn btn-outline" onclick="filterShopCategory('men')">Men's Edit</button>
+              </div>
+              <div class="hero-highlights">
+                <div class="hero-stat"><strong>15k+</strong> Curated Styles</div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat"><strong>100%</strong> Certified Organic</div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat"><strong>4.9★</strong> Top Rated</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VALUE PROPOSITIONS BAR -->
+      <section class="perks-section">
+        <div class="container perks-grid">
+          <div class="perk-card">
+            <div class="perk-icon">✈️</div>
+            <div class="perk-text">
+              <h4>Free Express Shipping</h4>
+              <p>On all domestic & global orders over ₹1,499</p>
+            </div>
+          </div>
+          <div class="perk-card">
+            <div class="perk-icon">🔄</div>
+            <div class="perk-text">
+              <h4>30-Day Easy Returns</h4>
+              <p>Hassle-free exchanges & full refunds</p>
+            </div>
+          </div>
+          <div class="perk-card">
+            <div class="perk-icon">💎</div>
+            <div class="perk-text">
+              <h4>100% Authentic Quality</h4>
+              <p>Hand-inspected premium textiles</p>
+            </div>
+          </div>
+          <div class="perk-card">
+            <div class="perk-icon">🛡️</div>
+            <div class="perk-text">
+              <h4>Secure Checkout</h4>
+              <p>256-bit encrypted simulated payments</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CATEGORY SPOTLIGHT SECTION -->
+      <section class="section categories-section">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="sub-heading">CURATED DEPARTMENTS</span>
+            <h2 class="section-title">Shop by Category</h2>
+            <p class="section-desc">Tailored ensembles crafted for contemporary aesthetics and ultimate comfort.</p>
+          </div>
+
+          <div class="category-grid">
+            <!-- Women -->
+            <div class="category-card" onclick="filterShopCategory('women')">
+              <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000&auto=format&fit=crop" alt="Women's Fashion" loading="lazy">
+              <div class="category-overlay">
+                <span class="category-tag">Elegance & Chic</span>
+                <h3 class="category-title">Women</h3>
+                <span class="category-link-text">Shop Dresses, Tops & Outerwear →</span>
+              </div>
+            </div>
+
+            <!-- Men -->
+            <div class="category-card" onclick="filterShopCategory('men')">
+              <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?q=80&w=1000&auto=format&fit=crop" alt="Men's Fashion" loading="lazy">
+              <div class="category-overlay">
+                <span class="category-tag">Modern Tailoring</span>
+                <h3 class="category-title">Men</h3>
+                <span class="category-link-text">Shop Suits, Shirts & Jackets →</span>
+              </div>
+            </div>
+
+            <!-- Kids -->
+            <div class="category-card" onclick="filterShopCategory('kids')">
+              <img src="https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?q=80&w=1000&auto=format&fit=crop" alt="Kids' Fashion" loading="lazy">
+              <div class="category-overlay">
+                <span class="category-tag">Playful & Soft</span>
+                <h3 class="category-title">Kids</h3>
+                <span class="category-link-text">Shop Everyday Outfits & Sets →</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURED PRODUCTS SECTION -->
+      <section class="section featured-products-section">
+        <div class="container">
+          <div class="section-header-flex">
+            <div>
+              <span class="sub-heading">HANDPICKED STYLES</span>
+              <h2 class="section-title">Trending This Week</h2>
+            </div>
+            <div class="tab-pill-group" id="home-featured-tabs">
+              <button type="button" class="tab-pill active" onclick="renderHomeFeatured('all')">All</button>
+              <button type="button" class="tab-pill" onclick="renderHomeFeatured('women')">Women</button>
+              <button type="button" class="tab-pill" onclick="renderHomeFeatured('men')">Men</button>
+              <button type="button" class="tab-pill" onclick="renderHomeFeatured('kids')">Kids</button>
+            </div>
+          </div>
+
+          <div class="products-grid" id="home-featured-grid">
+            <!-- Injected via JavaScript -->
+          </div>
+
+          <div class="text-center mt-40">
+            <button type="button" class="btn btn-secondary btn-lg" onclick="filterShopCategory('all')">
+              Browse Full Catalog (12+ Items)
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEASONAL PROMOTIONAL BANNER -->
+      <section class="promo-banner-section">
+        <div class="container">
+          <div class="promo-banner-card">
+            <div class="promo-content">
+              <span class="promo-badge">LIMITED TIME SALE</span>
+              <h2 class="promo-title">Up to 40% Off Spring Essentials</h2>
+              <p class="promo-desc">Upgrade your seasonal wardrobe with premium cashmere knits, breathable linen blazers, and luxury silk dresses.</p>
+              <div class="promo-countdown" id="promo-timer">
+                <div class="timer-unit"><span class="timer-num" id="time-days">02</span><span class="timer-lbl">Days</span></div>
+                <div class="timer-sep">:</div>
+                <div class="timer-unit"><span class="timer-num" id="time-hours">14</span><span class="timer-lbl">Hours</span></div>
+                <div class="timer-sep">:</div>
+                <div class="timer-unit"><span class="timer-num" id="time-mins">36</span><span class="timer-lbl">Mins</span></div>
+                <div class="timer-sep">:</div>
+                <div class="timer-unit"><span class="timer-num" id="time-secs">50</span><span class="timer-lbl">Secs</span></div>
+              </div>
+              <div class="promo-cta-row">
+                <button type="button" class="btn btn-primary" onclick="filterShopCategory('all')">Claim 40% Off</button>
+                <span class="coupon-reminder">Use Code: <strong>STYLE40</strong> at checkout</span>
+              </div>
+            </div>
+            <div class="promo-image-box">
+              <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1000&auto=format&fit=crop" alt="Fashion Sale Model" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CUSTOMER TESTIMONIALS -->
+      <section class="section testimonials-section">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="sub-heading">COMMUNITY REVIEWS</span>
+            <h2 class="section-title">Loved by Fashion Enthusiasts</h2>
+          </div>
+          <div class="testimonials-grid">
+            <div class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p class="quote">"The Italian Wool Trench Coat is simply sublime. The tailoring is sharp, the drape is heavy and luxurious, and it arrived in 2 days."</p>
+              <div class="author-info">
+                <div class="avatar">VS</div>
+                <div>
+                  <h5>Victoria Sterling</h5>
+                  <span>Verified Buyer • New York</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p class="quote">"StyleHub has become my go-to for minimalist wardrobe staples. The linen shirts and dresses have incredible breathability and fit."</p>
+              <div class="author-info">
+                <div class="avatar">MD</div>
+                <div>
+                  <h5>Marcus Davies</h5>
+                  <span>Verified Buyer • London</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p class="quote">"Found the perfect organic cotton matching outfits for my kids and myself. Soft, durable against washing, and sustainably packaged!"</p>
+              <div class="author-info">
+                <div class="avatar">EL</div>
+                <div>
+                  <h5>Elena Laurent</h5>
+                  <span>Verified Buyer • Paris</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NEWSLETTER SUBSCRIPTION -->
+      <section class="newsletter-section">
+        <div class="container newsletter-box">
+          <div class="newsletter-text">
+            <h3>Join the StyleHub VIP Society</h3>
+            <p>Subscribe for exclusive early-access collections, style guides, and an instant ₹500 welcome coupon.</p>
+          </div>
+          <form class="newsletter-form" id="home-newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+            <input type="email" placeholder="Enter your email address..." required aria-label="Newsletter email">
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+        </div>
+      </section>
+
+    </section>
+
+
+    <!-- ============================================== -->
+    <!-- 2. PRODUCT LISTING / SHOP VIEW -->
+    <!-- ============================================== -->
+    <section class="app-view" id="shop-view" style="display: none;">
+      <div class="container shop-page-container">
+        
+        <!-- Shop Header & Breadcrumb -->
+        <div class="shop-header-banner">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="#" onclick="navigateTo('home'); return false;">Home</a>
+            <span class="breadcrumb-sep">/</span>
+            <span id="shop-breadcrumb-current">All Collections</span>
+          </nav>
+          <div class="shop-title-row">
+            <div>
+              <h1 class="shop-main-title" id="shop-heading-title">Explore All Collections</h1>
+              <p class="shop-subtitle" id="shop-heading-desc">Showing premium handcrafted garments designed for timeless elegance.</p>
+            </div>
+            <button type="button" class="btn btn-outline mobile-filter-toggle-btn" id="mobile-filter-btn" onclick="toggleMobileFilterDrawer()">
+              ⚙️ Filters & Sorting
+            </button>
+          </div>
+        </div>
+
+        <!-- Shop Content Layout (Sidebar + Product Grid) -->
+        <div class="shop-layout">
+          
+          <!-- FILTERS SIDEBAR -->
+          <aside class="shop-sidebar" id="shop-sidebar">
+            <div class="sidebar-header-mobile">
+              <h3>Filter Products</h3>
+              <button type="button" class="close-btn" onclick="toggleMobileFilterDrawer()">✕</button>
+            </div>
+
+            <!-- Active Filters Reset -->
+            <div class="filter-group filter-actions-group">
+              <div class="filter-header-flex">
+                <span class="filter-title">Active Filters</span>
+                <button type="button" class="clear-filters-link" onclick="resetAllFilters()">Reset All</button>
+              </div>
+              <div class="active-filter-tags" id="active-filter-tags">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Search in Shop -->
+            <div class="filter-group">
+              <label class="filter-label" for="shop-search-input">Search Keywords</label>
+              <div class="sidebar-search-box">
+                <input type="text" id="shop-search-input" placeholder="Search by name, fabric..." oninput="handleShopSearch(event)">
+              </div>
+            </div>
+
+            <!-- Categories Filter -->
+            <div class="filter-group">
+              <h4 class="filter-group-title">Department</h4>
+              <ul class="filter-category-list">
+                <li>
+                  <label class="filter-radio-label">
+                    <input type="radio" name="shop-category" value="all" checked onchange="setCategoryFilter('all')">
+                    <span>All Collections</span>
+                    <span class="count-badge" id="count-all">(12)</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="filter-radio-label">
+                    <input type="radio" name="shop-category" value="women" onchange="setCategoryFilter('women')">
+                    <span>Women's Fashion</span>
+                    <span class="count-badge" id="count-women">(5)</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="filter-radio-label">
+                    <input type="radio" name="shop-category" value="men" onchange="setCategoryFilter('men')">
+                    <span>Men's Fashion</span>
+                    <span class="count-badge" id="count-men">(4)</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="filter-radio-label">
+                    <input type="radio" name="shop-category" value="kids" onchange="setCategoryFilter('kids')">
+                    <span>Kids' Fashion</span>
+                    <span class="count-badge" id="count-kids">(3)</span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Price Range Filter -->
+            <div class="filter-group">
+              <div class="filter-header-flex">
+                <h4 class="filter-group-title">Max Price</h4>
+                <span class="price-val-badge" id="price-range-display">₹8,000</span>
+              </div>
+              <input type="range" id="price-slider" min="500" max="8000" step="250" value="8000" class="custom-range-slider" oninput="handlePriceFilter(event)">
+              <div class="price-range-labels">
+                <span>₹500</span>
+                <span>₹4,000</span>
+                <span>₹8,000</span>
+              </div>
+            </div>
+
+            <!-- Size Filter -->
+            <div class="filter-group">
+              <div class="filter-header-flex">
+                <h4 class="filter-group-title">Available Sizes</h4>
+                <button type="button" class="size-guide-link" onclick="openSizeGuideModal()">Size Chart 📐</button>
+              </div>
+              <div class="size-filter-grid" id="size-filter-grid">
+                <button type="button" class="size-btn active" data-size="ALL" onclick="setSizeFilter('ALL')">ALL</button>
+                <button type="button" class="size-btn" data-size="XS" onclick="setSizeFilter('XS')">XS</button>
+                <button type="button" class="size-btn" data-size="S" onclick="setSizeFilter('S')">S</button>
+                <button type="button" class="size-btn" data-size="M" onclick="setSizeFilter('M')">M</button>
+                <button type="button" class="size-btn" data-size="L" onclick="setSizeFilter('L')">L</button>
+                <button type="button" class="size-btn" data-size="XL" onclick="setSizeFilter('XL')">XL</button>
+                <button type="button" class="size-btn" data-size="XXL" onclick="setSizeFilter('XXL')">XXL</button>
+              </div>
+            </div>
+
+            <!-- Color Filter -->
+            <div class="filter-group">
+              <h4 class="filter-group-title">Color Palette</h4>
+              <div class="color-swatch-list" id="color-filter-list">
+                <button type="button" class="color-swatch-btn active" data-color="ALL" title="All Colors" onclick="setColorFilter('ALL')">
+                  <span class="swatch-circle all-swatch">🌈</span>
+                  <span class="color-label">All</span>
+                </button>
+                <button type="button" class="color-swatch-btn" data-color="Pink" title="Pink" onclick="setColorFilter('Pink')">
+                  <span class="swatch-circle" style="background:#E91E63;"></span>
+                  <span class="color-label">Pink</span>
+                </button>
+                <button type="button" class="color-swatch-btn" data-color="Black" title="Black" onclick="setColorFilter('Black')">
+                  <span class="swatch-circle" style="background:#1A1A2E;"></span>
+                  <span class="color-label">Black</span>
+                </button>
+                <button type="button" class="color-swatch-btn" data-color="White" title="White" onclick="setColorFilter('White')">
+                  <span class="swatch-circle" style="background:#FFFFFF; border:1px solid #ccc;"></span>
+                  <span class="color-label">White</span>
+                </button>
+                <button type="button" class="color-swatch-btn" data-color="Blue" title="Blue" onclick="setColorFilter('Blue')">
+                  <span class="swatch-circle" style="background:#1E3A8A;"></span>
+                  <span class="color-label">Navy</span>
+                </button>
+                <button type="button" class="color-swatch-btn" data-color="Gold" title="Gold" onclick="setColorFilter('Gold')">
+                  <span class="swatch-circle" style="background:#D4AF37;"></span>
+                  <span class="color-label">Gold</span>
+                </button>
+                <button type="button" class="color-swatch-btn" data-color="Beige" title="Beige" onclick="setColorFilter('Beige')">
+                  <span class="swatch-circle" style="background:#E5D3B3;"></span>
+                  <span class="color-label">Beige</span>
+                </button>
+                <button type="button" class="color-swatch-btn" data-color="Green" title="Green" onclick="setColorFilter('Green')">
+                  <span class="swatch-circle" style="background:#2D6A4F;"></span>
+                  <span class="color-label">Olive</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Customer Rating Filter -->
+            <div class="filter-group">
+              <h4 class="filter-group-title">Minimum Rating</h4>
+              <div class="rating-filter-options">
+                <label class="filter-radio-label">
+                  <input type="radio" name="rating-filter" value="0" checked onchange="setRatingFilter(0)">
+                  <span>All Ratings</span>
+                </label>
+                <label class="filter-radio-label">
+                  <input type="radio" name="rating-filter" value="4" onchange="setRatingFilter(4)">
+                  <span>★ 4.0 & above</span>
+                </label>
+                <label class="filter-radio-label">
+                  <input type="radio" name="rating-filter" value="4.5" onchange="setRatingFilter(4.5)">
+                  <span>★ 4.5 & above</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="sidebar-apply-mobile">
+              <button type="button" class="btn btn-primary btn-block" onclick="toggleMobileFilterDrawer()">Apply Filters</button>
+            </div>
+          </aside>
+
+          <!-- PRODUCTS MAIN AREA -->
+          <div class="shop-main-content">
+            
+            <!-- Controls Bar: Results Count + Sort Dropdown -->
+            <div class="shop-controls-bar">
+              <div class="results-count-text">
+                Showing <strong id="visible-products-count">12</strong> garments
+              </div>
+              <div class="sort-controls">
+                <label for="shop-sort-select">Sort By:</label>
+                <select id="shop-sort-select" class="custom-select" onchange="handleSortChange(event)">
+                  <option value="featured">✨ Featured & Trending</option>
+                  <option value="price-low">💵 Price: Low to High</option>
+                  <option value="price-high">💎 Price: High to Low</option>
+                  <option value="rating">⭐ Highest Rated</option>
+                  <option value="name-az">🔤 Name: A to Z</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Dynamic Product Grid -->
+            <div class="products-grid shop-products-grid" id="shop-products-grid">
+              <!-- Products injected via JS -->
+            </div>
+
+            <!-- Empty State if No Matching Filters -->
+            <div class="empty-state-card" id="shop-empty-state" style="display: none;">
+              <div class="empty-icon">🔍</div>
+              <h3>No matching garments found</h3>
+              <p>Try widening your search terms, adjusting the price slider, or resetting selected filters.</p>
+              <button type="button" class="btn btn-primary" onclick="resetAllFilters()">Reset All Filters</button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================== -->
+    <!-- 3. PRODUCT DETAILS VIEW -->
+    <!-- ============================================== -->
+    <section class="app-view" id="product-detail-view" style="display: none;">
+      <div class="container product-detail-container">
+        
+        <!-- Breadcrumbs -->
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="#" onclick="navigateTo('home'); return false;">Home</a>
+          <span class="breadcrumb-sep">/</span>
+          <a href="#" id="detail-category-breadcrumb" onclick="filterShopCategory('all'); return false;">Women</a>
+          <span class="breadcrumb-sep">/</span>
+          <span id="detail-product-breadcrumb">Floral Silk Dress</span>
+        </nav>
+
+        <!-- Product Primary Layout -->
+        <div class="product-detail-main">
+          
+          <!-- Image Gallery Column -->
+          <div class="product-gallery-col">
+            <div class="main-image-wrapper">
+              <img src="" alt="Product Detail" id="detail-main-img" class="detail-main-image">
+              <span class="detail-badge" id="detail-badge">NEW IN</span>
+            </div>
+            <!-- Thumbnails Row -->
+            <div class="gallery-thumbnails" id="detail-thumbnails-row">
+              <!-- Thumbnails generated in JS -->
+            </div>
+          </div>
+
+          <!-- Product Details & Purchase Controls -->
+          <div class="product-info-col">
+            <div class="product-meta-header">
+              <span class="product-category-tag" id="detail-category-tag">WOMEN'S APPAREL</span>
+              <h1 class="product-name-title" id="detail-title">Floral Summer Dress</h1>
+              
+              <div class="rating-review-row">
+                <div class="star-rating" id="detail-stars">★★★★★</div>
+                <span class="rating-score" id="detail-rating-score">4.8</span>
+                <span class="rating-count" id="detail-review-count">(124 customer reviews)</span>
+                <span class="stock-status in-stock" id="detail-stock-status">✓ In Stock & Ready to Ship</span>
+              </div>
+            </div>
+
+            <!-- Price Box -->
+            <div class="price-container-box">
+              <span class="current-price" id="detail-price">₹1,499</span>
+              <span class="original-price" id="detail-original-price">₹2,499</span>
+              <span class="discount-badge" id="detail-discount-badge">Save 28%</span>
+            </div>
+
+            <!-- Short Overview -->
+            <p class="product-short-description" id="detail-description">
+              Expertly tailored in our Milanese ateliers from breathable Mulberry silk. Features a flattering A-line silhouette, invisible zip fastening, and delicate hand-finished seams.
+            </p>
+
+            <hr class="detail-divider">
+
+            <!-- Color Selection -->
+            <div class="detail-option-section">
+              <div class="option-header-row">
+                <span class="option-title">Color: <strong id="selected-color-name">Pink</strong></span>
+              </div>
+              <div class="color-swatch-list" id="detail-colors-container">
+                <!-- Color pills generated via JS -->
+              </div>
+            </div>
+
+            <!-- Size Selection -->
+            <div class="detail-option-section">
+              <div class="option-header-row">
+                <span class="option-title">Size: <strong id="selected-size-name">M</strong></span>
+                <button type="button" class="size-guide-btn" onclick="openSizeGuideModal()">Size Guide & Measurements 📏</button>
+              </div>
+              <div class="size-selector-row" id="detail-sizes-container">
+                <!-- Size boxes generated via JS -->
+              </div>
+            </div>
+
+            <!-- Quantity & Action Buttons -->
+            <div class="detail-actions-section">
+              <div class="quantity-stepper">
+                <button type="button" class="qty-btn" onclick="adjustDetailQuantity(-1)">−</button>
+                <span class="qty-display" id="detail-quantity-val">1</span>
+                <button type="button" class="qty-btn" onclick="adjustDetailQuantity(1)">+</button>
+              </div>
+
+              <button type="button" class="btn btn-primary btn-add-cart" id="detail-add-cart-btn" onclick="addToCartFromDetail()">
+                🛍️ Add to Shopping Bag
+              </button>
+
+              <button type="button" class="btn btn-wishlist-toggle" id="detail-wishlist-btn" onclick="toggleDetailWishlist()" title="Add to Wishlist">
+                🤍
+              </button>
+            </div>
+
+            <!-- Buy Now Direct Action -->
+            <button type="button" class="btn btn-secondary btn-block mt-12" onclick="buyNowFromDetail()">
+              ⚡ Instant Checkout
+            </button>
+
+            <!-- Delivery & Authenticity Highlights -->
+            <div class="product-highlights-box">
+              <div class="highlight-item">
+                <span class="h-icon">🚚</span>
+                <div>
+                  <strong>Estimated Delivery:</strong>
+                  <span>2–4 Business Days with Tracked Shipping</span>
+                </div>
+              </div>
+              <div class="highlight-item">
+                <span class="h-icon">🛡️</span>
+                <div>
+                  <strong>Ethical Promise:</strong>
+                  <span>100% GOTS Certified Sustainable Natural Dyes</span>
+                </div>
+              </div>
+              <div class="highlight-item">
+                <span class="h-icon">🔄</span>
+                <div>
+                  <strong>Free Exchanges:</strong>
+                  <span>Prepaid return label enclosed in your parcel</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Product Tabbed Information (Specs / Reviews / Care) -->
+        <div class="product-tabs-container">
+          <div class="tabs-nav">
+            <button type="button" class="tab-btn active" onclick="switchDetailTab('desc')">Detailed Specs & Fit</button>
+            <button type="button" class="tab-btn" onclick="switchDetailTab('reviews')">Customer Reviews (<span id="tab-reviews-count">3</span>)</button>
+            <button type="button" class="tab-btn" onclick="switchDetailTab('care')">Care & Sustainability</button>
+          </div>
+
+          <!-- Description / Specs Tab -->
+          <div class="tab-panel active" id="tab-panel-desc">
+            <div class="specs-grid">
+              <div class="spec-col">
+                <h3>Material & Construction</h3>
+                <ul>
+                  <li><strong>Composition:</strong> 100% Mulberry Silk / Pure Linen Weave</li>
+                  <li><strong>Lining:</strong> Breathable Cupro lining for smooth glide</li>
+                  <li><strong>Closure:</strong> Concealed back YKK zipper with hook-and-eye</li>
+                  <li><strong>Hemline:</strong> Mid-calf tailored hem with side slit</li>
+                </ul>
+              </div>
+              <div class="spec-col">
+                <h3>Model & Sizing Reference</h3>
+                <ul>
+                  <li><strong>Model Height:</strong> 5'10" (178 cm) wearing Size S</li>
+                  <li><strong>Fit Type:</strong> True to size, tailored waist, relaxed skirt</li>
+                  <li><strong>Origin:</strong> Hand-crafted in Milan, Italy</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reviews Tab -->
+          <div class="tab-panel" id="tab-panel-reviews" style="display:none;">
+            <div class="reviews-section-layout">
+              <!-- Reviews List -->
+              <div class="reviews-list-col">
+                <div class="reviews-list" id="detail-reviews-list">
+                  <!-- Reviews populated in JS -->
+                </div>
+              </div>
+
+              <!-- Add Review Form -->
+              <div class="add-review-col">
+                <div class="add-review-card">
+                  <h3>Write a Review</h3>
+                  <p>Share your thoughts with other style seekers.</p>
+                  <form id="add-review-form" onsubmit="handleReviewSubmit(event)">
+                    <div class="form-group">
+                      <label>Your Rating</label>
+                      <div class="star-rating-input" id="star-rating-input">
+                        <span class="star-choice active" data-val="5" onclick="setReviewRating(5)">★</span>
+                        <span class="star-choice active" data-val="4" onclick="setReviewRating(4)">★</span>
+                        <span class="star-choice active" data-val="3" onclick="setReviewRating(3)">★</span>
+                        <span class="star-choice active" data-val="2" onclick="setReviewRating(2)">★</span>
+                        <span class="star-choice active" data-val="1" onclick="setReviewRating(1)">★</span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="review-user-name">Your Name</label>
+                      <input type="text" id="review-user-name" required placeholder="e.g. Sarah Jenkins">
+                    </div>
+                    <div class="form-group">
+                      <label for="review-user-comment">Your Review</label>
+                      <textarea id="review-user-comment" rows="3" required placeholder="Describe the fit, fabric feel, and quality..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Post Verified Review</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Care Tab -->
+          <div class="tab-panel" id="tab-panel-care" style="display:none;">
+            <div class="care-content">
+              <h3>Garment Longevity & Care Instructions</h3>
+              <p>Our luxury garments are designed to last a lifetime when treated with thoughtful care.</p>
+              <div class="care-icons-row">
+                <div class="care-item">🧼 Hand wash cold or gentle dry clean only</div>
+                <div class="care-item">🚫 Do not bleach or use chlorine solvents</div>
+                <div class="care-item">💨 Lay flat to dry in gentle shade</div>
+                <div class="care-item">♨️ Cool iron on reverse side under protective cloth</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RELATED PRODUCTS CAROUSEL/GRID -->
+        <div class="related-products-section">
+          <div class="section-header">
+            <span class="sub-heading">COMPLETE THE LOOK</span>
+            <h2 class="section-title">You May Also Like</h2>
+          </div>
+          <div class="products-grid" id="related-products-grid">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================== -->
+    <!-- 4. SHOPPING CART VIEW -->
+    <!-- ============================================== -->
+    <section class="app-view" id="cart-view" style="display: none;">
+      <div class="container cart-page-container">
+        
+        <div class="cart-page-header">
+          <h1 class="page-title">Shopping Bag</h1>
+          <p>Review and edit your selected items before proceeding to secure checkout.</p>
+        </div>
+
+        <div class="cart-layout" id="cart-layout-content">
+          <!-- Cart Items Column -->
+          <div class="cart-items-col">
+            
+            <!-- Free Shipping Progress Tracker -->
+            <div class="free-shipping-bar-card">
+              <div class="shipping-msg" id="free-shipping-msg">
+                Add <strong>₹1,499</strong> more to unlock <strong>FREE Global Express Shipping</strong>!
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="free-shipping-progress" style="width: 75%;"></div>
+              </div>
+            </div>
+
+            <!-- Cart Table / List -->
+            <div class="cart-items-list" id="cart-items-container">
+              <!-- Rendered via JS -->
+            </div>
+
+            <div class="cart-bottom-actions">
+              <button type="button" class="btn btn-outline" onclick="filterShopCategory('all')">
+                ← Continue Shopping
+              </button>
+              <button type="button" class="btn btn-outline-danger" onclick="clearCart()">
+                🗑️ Empty Bag
+              </button>
+            </div>
+          </div>
+
+          <!-- Cart Order Summary Sidebar -->
+          <div class="cart-summary-col">
+            <div class="summary-card">
+              <h3 class="summary-title">Order Summary</h3>
+
+              <div class="summary-row">
+                <span>Bag Subtotal</span>
+                <span id="summary-subtotal">₹0</span>
+              </div>
+
+              <div class="summary-row">
+                <span>Estimated Shipping</span>
+                <span id="summary-shipping">FREE</span>
+              </div>
+
+              <div class="summary-row discount-row" id="summary-discount-row" style="display: none;">
+                <span>Promo Discount (<span id="summary-discount-code"></span>)</span>
+                <span class="discount-amount" id="summary-discount-val">−₹0</span>
+              </div>
+
+              <div class="summary-row">
+                <span>Estimated Taxes (Calculated)</span>
+                <span id="summary-tax">₹0</span>
+              </div>
+
+              <hr class="summary-divider">
+
+              <!-- Promo Code Input Form -->
+              <div class="coupon-box">
+                <label for="cart-coupon-input" class="coupon-label">Have a Promotional Code?</label>
+                <div class="coupon-input-group">
+                  <input type="text" id="cart-coupon-input" placeholder="e.g. STYLE40" uppercase>
+                  <button type="button" class="btn btn-secondary" onclick="applyCouponCode()">Apply</button>
+                </div>
+                <div class="coupon-feedback" id="coupon-feedback-msg"></div>
+                <div class="coupon-hints">
+                  <span>💡 Try <strong>STYLE40</strong> (40% off) or <strong>FIRST10</strong> (₹500 off)</span>
+                </div>
+              </div>
+
+              <hr class="summary-divider">
+
+              <div class="summary-total-row">
+                <span>Total Amount</span>
+                <span class="total-price" id="summary-total">₹0</span>
+              </div>
+
+              <button type="button" class="btn btn-primary btn-block btn-lg mt-20" onclick="proceedToCheckout()">
+                Proceed to Checkout →
+              </button>
+
+              <div class="secure-checkout-guarantee">
+                🔒 Guaranteed 256-Bit SSL Encrypted Simulated Checkout
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty Cart State -->
+        <div class="empty-state-card" id="cart-empty-state" style="display: none;">
+          <div class="empty-icon">🛍️</div>
+          <h2>Your Shopping Bag is Empty</h2>
+          <p>Explore our curated collections of dresses, jackets, suits, and accessories to find your signature look.</p>
+          <button type="button" class="btn btn-primary btn-lg" onclick="filterShopCategory('all')">
+            Start Shopping Now
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================== -->
+    <!-- 5. CHECKOUT VIEW -->
+    <!-- ============================================== -->
+    <section class="app-view" id="checkout-view" style="display: none;">
+      <div class="container checkout-page-container">
+        
+        <div class="checkout-page-header">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="#" onclick="navigateTo('cart'); return false;">Cart</a>
+            <span class="breadcrumb-sep">/</span>
+            <span>Secure Checkout</span>
+          </nav>
+          <h1 class="page-title">Checkout & Place Order</h1>
+        </div>
+
+        <div class="checkout-layout">
+          
+          <!-- Checkout Forms Column -->
+          <div class="checkout-form-col">
+            <form id="checkout-main-form" onsubmit="handlePlaceOrder(event)">
+              
+              <!-- Section 1: Customer Contact & Shipping Details -->
+              <div class="checkout-block">
+                <div class="block-header">
+                  <span class="step-num">1</span>
+                  <h3>Shipping & Customer Information</h3>
+                </div>
+
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label for="checkout-first-name">Full Name *</label>
+                    <input type="text" id="checkout-first-name" required placeholder="Elena Rostova">
+                  </div>
+                  <div class="form-group">
+                    <label for="checkout-email">Email Address *</label>
+                    <input type="email" id="checkout-email" required placeholder="elena@example.com">
+                  </div>
+                </div>
+
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label for="checkout-phone">Mobile Phone Number *</label>
+                    <input type="tel" id="checkout-phone" required placeholder="+1 (555) 321-7890">
+                  </div>
+                  <div class="form-group">
+                    <label for="checkout-country">Country / Region *</label>
+                    <select id="checkout-country" class="custom-select">
+                      <option value="US">United States</option>
+                      <option value="IN">India</option>
+                      <option value="UK">United Kingdom</option>
+                      <option value="CA">Canada</option>
+                      <option value="AU">Australia</option>
+                      <option value="EU">European Union</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="checkout-address">Street Address / Suite / Apartment *</label>
+                  <input type="text" id="checkout-address" required placeholder="742 Evergreen Terrace, Apt 4B">
+                </div>
+
+                <div class="form-grid-3">
+                  <div class="form-group">
+                    <label for="checkout-city">City *</label>
+                    <input type="text" id="checkout-city" required placeholder="New York">
+                  </div>
+                  <div class="form-group">
+                    <label for="checkout-state">State / Province *</label>
+                    <input type="text" id="checkout-state" required placeholder="NY">
+                  </div>
+                  <div class="form-group">
+                    <label for="checkout-pincode">Pincode / ZIP Code *</label>
+                    <input type="text" id="checkout-pincode" required placeholder="10001">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="checkout-notes">Delivery Instructions (Optional)</label>
+                  <input type="text" id="checkout-notes" placeholder="e.g. Leave at front doorman / Ring bell 4B">
+                </div>
+
+                <div class="form-checkbox-group">
+                  <label class="custom-checkbox">
+                    <input type="checkbox" id="checkout-save-address" checked>
+                    <span>Save this address to my StyleHub profile for next time</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Section 2: Delivery Method -->
+              <div class="checkout-block">
+                <div class="block-header">
+                  <span class="step-num">2</span>
+                  <h3>Shipping Method</h3>
+                </div>
+
+                <div class="shipping-options-list">
+                  <label class="shipping-option-card">
+                    <input type="radio" name="shipping-method" value="standard" checked onchange="updateCheckoutShipping(0)">
+                    <div class="shipping-option-info">
+                      <div class="shipping-title-row">
+                        <strong>Standard Courier Delivery</strong>
+                        <span class="shipping-cost">FREE</span>
+                      </div>
+                      <p>Estimated 3–5 Business Days</p>
+                    </div>
+                  </label>
+
+                  <label class="shipping-option-card">
+                    <input type="radio" name="shipping-method" value="express" onchange="updateCheckoutShipping(149)">
+                    <div class="shipping-option-info">
+                      <div class="shipping-title-row">
+                        <strong>Express Air Courier</strong>
+                        <span class="shipping-cost">₹149</span>
+                      </div>
+                      <p>Estimated 1–2 Business Days with Priority Dispatch</p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Section 3: Payment Method Simulation -->
+              <div class="checkout-block">
+                <div class="block-header">
+                  <span class="step-num">3</span>
+                  <h3>Payment Method (Simulated)</h3>
+                </div>
+
+                <div class="payment-tabs-group">
+                  <label class="payment-tab-label">
+                    <input type="radio" name="payment-type" value="card" checked onchange="togglePaymentFields('card')">
+                    <span>💳 Credit / Debit Card</span>
+                  </label>
+                  <label class="payment-tab-label">
+                    <input type="radio" name="payment-type" value="upi" onchange="togglePaymentFields('upi')">
+                    <span>📱 UPI / QR Pay</span>
+                  </label>
+                  <label class="payment-tab-label">
+                    <input type="radio" name="payment-type" value="cod" onchange="togglePaymentFields('cod')">
+                    <span>💵 Cash on Delivery</span>
+                  </label>
+                </div>
+
+                <!-- Card Details Panel -->
+                <div class="payment-fields-panel" id="payment-card-panel">
+                  <div class="form-group">
+                    <label for="card-number">Card Number</label>
+                    <input type="text" id="card-number" placeholder="4532 •••• •••• 8892" maxlength="19">
+                  </div>
+                  <div class="form-grid-2">
+                    <div class="form-group">
+                      <label for="card-expiry">Expiry Date</label>
+                      <input type="text" id="card-expiry" placeholder="MM / YY" maxlength="5">
+                    </div>
+                    <div class="form-group">
+                      <label for="card-cvv">CVV</label>
+                      <input type="password" id="card-cvv" placeholder="•••" maxlength="4">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="card-holder">Cardholder Name</label>
+                    <input type="text" id="card-holder" placeholder="Name as printed on card">
+                  </div>
+                </div>
+
+                <!-- UPI Panel -->
+                <div class="payment-fields-panel" id="payment-upi-panel" style="display: none;">
+                  <div class="form-group">
+                    <label for="upi-id">UPI ID / Virtual Payment Address</label>
+                    <input type="text" id="upi-id" placeholder="username@okhdfcbank">
+                  </div>
+                  <p class="small-hint">You will receive a simulated instant payment confirmation upon placing order.</p>
+                </div>
+
+                <!-- COD Panel -->
+                <div class="payment-fields-panel" id="payment-cod-panel" style="display: none;">
+                  <p class="cod-notice">Pay via cash or card upon package arrival at your doorstep.</p>
+                </div>
+
+              </div>
+
+              <div class="checkout-submit-btn-row">
+                <button type="submit" class="btn btn-primary btn-block btn-lg" id="btn-place-order">
+                  Place Order & Complete Purchase
+                </button>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- Checkout Order Review Column -->
+          <div class="checkout-summary-col">
+            <div class="summary-card">
+              <h3 class="summary-title">Items in Order (<span id="checkout-items-count">0</span>)</h3>
+
+              <div class="checkout-items-mini-list" id="checkout-mini-list">
+                <!-- Mini product rows populated via JS -->
+              </div>
+
+              <hr class="summary-divider">
+
+              <!-- Coupon Code on Checkout -->
+              <div class="coupon-box">
+                <div class="coupon-input-group">
+                  <input type="text" id="checkout-coupon-input" placeholder="Promo code (e.g. STYLE40)">
+                  <button type="button" class="btn btn-secondary" onclick="applyCheckoutCoupon()">Apply</button>
+                </div>
+                <div class="coupon-feedback" id="checkout-coupon-feedback"></div>
+              </div>
+
+              <hr class="summary-divider">
+
+              <div class="summary-row">
+                <span>Subtotal</span>
+                 <span id="checkout-subtotal">₹0</span>
+              </div>
+              <div class="summary-row" id="checkout-discount-row" style="display: none;">
+                <span>Discount</span>
+                 <span class="discount-amount" id="checkout-discount-val">−₹0</span>
+              </div>
+              <div class="summary-row">
+                <span>Shipping</span>
+                <span id="checkout-shipping">FREE</span>
+              </div>
+              <div class="summary-row">
+                <span>Estimated Taxes</span>
+                 <span id="checkout-tax">₹0</span>
+              </div>
+
+              <hr class="summary-divider">
+
+              <div class="summary-total-row">
+                <span>Total Due</span>
+                 <span class="total-price" id="checkout-total">₹0</span>
+              </div>
+
+              <div class="checkout-perks-mini">
+                <div>✓ 30-Day Money Back Guarantee</div>
+                <div>✓ Free Prepaid Exchanges</div>
+                <div>✓ Live Simulated Tracking Number</div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================== -->
+    <!-- 6. ORDER SUCCESS & LIVE TRACKING VIEW -->
+    <!-- ============================================== -->
+    <section class="app-view" id="order-success-view" style="display: none;">
+      <div class="container order-success-container">
+        
+        <div class="success-card">
+          <div class="success-check-icon">✓</div>
+          <span class="success-badge">ORDER PLACED SUCCESSFULLY</span>
+          <h1 class="success-title">Thank You For Your Order!</h1>
+          <p class="success-subtitle">We have received your order and our Milanese packaging team is preparing your garments with love.</p>
+          
+          <div class="order-id-box">
+            <span>Tracking Number:</span>
+            <strong id="success-tracking-id">STH-9482710</strong>
+            <button type="button" class="btn-copy-id" onclick="copyTrackingNumber()">📋 Copy</button>
+          </div>
+
+          <!-- SIMULATED LIVE TRACKING PROGRESS BAR -->
+          <div class="tracking-stepper-box">
+            <h3 class="tracking-title">Simulated Real-Time Order Tracking</h3>
+            <div class="tracking-stepper">
+              <div class="track-step completed" id="track-step-1">
+                <div class="step-circle">✓</div>
+                <div class="step-info">
+                  <strong>Order Confirmed</strong>
+                  <span>Payment Verified</span>
+                </div>
+              </div>
+              <div class="track-line completed" id="track-line-1"></div>
+              <div class="track-step active" id="track-step-2">
+                <div class="step-circle">📦</div>
+                <div class="step-info">
+                  <strong>Preparing & Packed</strong>
+                  <span>Quality Inspected</span>
+                </div>
+              </div>
+              <div class="track-line" id="track-line-2"></div>
+              <div class="track-step" id="track-step-3">
+                <div class="step-circle">✈️</div>
+                <div class="step-info">
+                  <strong>Dispatched / Shipped</strong>
+                  <span>Air Courier</span>
+                </div>
+              </div>
+              <div class="track-line" id="track-line-3"></div>
+              <div class="track-step" id="track-step-4">
+                <div class="step-circle">🏡</div>
+                <div class="step-info">
+                  <strong>Delivered</strong>
+                  <span>To Your Door</span>
+                </div>
+              </div>
+            </div>
+            <p class="tracking-note">Estimated Delivery by <strong id="success-delivery-date">Wednesday, Aug 19</strong></p>
+          </div>
+
+          <!-- Purchased Items Summary -->
+          <div class="order-summary-mini-card">
+            <h3>Items in this Order</h3>
+            <div class="success-items-list" id="success-items-list">
+              <!-- Rendered via JS -->
+            </div>
+            <div class="success-total-row">
+              <span>Total Paid:</span>
+               <strong id="success-total-amount">₹0</strong>
+            </div>
+          </div>
+
+          <div class="success-actions-row">
+            <button type="button" class="btn btn-primary" onclick="filterShopCategory('all')">
+              🛍️ Continue Shopping
+            </button>
+            <button type="button" class="btn btn-outline" onclick="navigateTo('account'); setAccountTab('orders');">
+              📜 View in Order History
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================== -->
+    <!-- 7. USER ACCOUNT VIEW -->
+    <!-- ============================================== -->
+    <section class="app-view" id="account-view" style="display: none;">
+      <div class="container account-page-container">
+        
+        <div class="account-header">
+          <div class="account-user-card">
+            <div class="user-avatar" id="account-avatar">JD</div>
+            <div class="user-meta">
+              <h1 class="user-display-name" id="account-name-heading">Jane Doe</h1>
+              <span class="user-membership-badge">⭐ VIP Gold Tier Member</span>
+              <p class="user-email-text" id="account-email-heading">jane.doe@example.com</p>
+            </div>
+          </div>
+          <button type="button" class="btn btn-outline-danger" onclick="handleLogout()">
+            Log Out
+          </button>
+        </div>
+
+        <div class="account-layout">
+          
+          <!-- Account Tabs Navigation -->
+          <aside class="account-tabs-nav">
+            <button type="button" class="acc-tab-btn active" data-tab="profile" onclick="setAccountTab('profile')">
+              👤 Personal Profile
+            </button>
+            <button type="button" class="acc-tab-btn" data-tab="orders" onclick="setAccountTab('orders')">
+              📦 Order History (<span id="acc-orders-count">0</span>)
+            </button>
+            <button type="button" class="acc-tab-btn" data-tab="wishlist" onclick="setAccountTab('wishlist')">
+              🤍 Saved Wishlist (<span id="acc-wishlist-count">0</span>)
+            </button>
+            <button type="button" class="acc-tab-btn" data-tab="addresses" onclick="setAccountTab('addresses')">
+              📍 Saved Addresses
+            </button>
+            <button type="button" class="acc-tab-btn" data-tab="preferences" onclick="setAccountTab('preferences')">
+              👗 Style & Sizing Preferences
+            </button>
+          </aside>
+
+          <!-- Account Tab Panels -->
+          <div class="account-tab-content">
+            
+            <!-- Tab 1: Profile -->
+            <div class="account-panel active" id="acc-panel-profile">
+              <div class="panel-card">
+                <div class="panel-header-flex">
+                  <h3>Personal Information</h3>
+                  <button type="button" class="btn btn-outline btn-sm" id="btn-edit-profile" onclick="toggleEditProfile()">Edit Info</button>
+                </div>
+
+                <form id="profile-edit-form" onsubmit="saveProfileChanges(event)">
+                  <div class="form-grid-2">
+                    <div class="form-group">
+                      <label>Full Name</label>
+                      <input type="text" id="profile-name-input" value="Jane Doe" disabled required>
+                    </div>
+                    <div class="form-group">
+                      <label>Email Address</label>
+                      <input type="email" id="profile-email-input" value="jane.doe@example.com" disabled required>
+                    </div>
+                  </div>
+
+                  <div class="form-grid-2">
+                    <div class="form-group">
+                      <label>Mobile Number</label>
+                      <input type="tel" id="profile-phone-input" value="+1 (555) 432-8921" disabled>
+                    </div>
+                    <div class="form-group">
+                      <label>Preferred Currency</label>
+                      <select id="profile-currency-input" class="custom-select" disabled>
+                    <option value="INR" selected>₹ INR</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div id="profile-save-btn-row" style="display: none;" class="mt-16">
+                    <button type="submit" class="btn btn-primary">Save Profile Updates</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Tab 2: Orders -->
+            <div class="account-panel" id="acc-panel-orders" style="display: none;">
+              <div class="panel-card">
+                <h3>Your Order History</h3>
+                <div class="orders-history-list" id="account-orders-list">
+                  <!-- Orders rendered via JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab 3: Wishlist in Account -->
+            <div class="account-panel" id="acc-panel-wishlist" style="display: none;">
+              <div class="panel-card">
+                <h3>Saved Wishlist Items</h3>
+                <div class="products-grid account-wishlist-grid" id="account-wishlist-grid">
+                  <!-- Wishlist items rendered via JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab 4: Addresses -->
+            <div class="account-panel" id="acc-panel-addresses" style="display: none;">
+              <div class="panel-card">
+                <div class="panel-header-flex">
+                  <h3>Saved Delivery Addresses</h3>
+                  <button type="button" class="btn btn-primary btn-sm" onclick="openAddAddressModal()">+ Add New Address</button>
+                </div>
+                <div class="addresses-grid" id="account-addresses-grid">
+                  <!-- Addresses rendered via JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab 5: Sizing Preferences -->
+            <div class="account-panel" id="acc-panel-preferences" style="display: none;">
+              <div class="panel-card">
+                <h3>Style & Sizing Profile</h3>
+                <p>Customize your sizes to get personalized recommendations across dresses, shirts, and footwear.</p>
+                <form id="preferences-form" onsubmit="savePreferences(event)">
+                  <div class="form-grid-3">
+                    <div class="form-group">
+                      <label>Top / Dress Size</label>
+                      <select id="pref-top-size" class="custom-select">
+                        <option value="XS">XS (Extra Small)</option>
+                        <option value="S">S (Small)</option>
+                        <option value="M" selected>M (Medium)</option>
+                        <option value="L">L (Large)</option>
+                        <option value="XL">XL (Extra Large)</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Bottom / Pant Waist</label>
+                      <select id="pref-bottom-size" class="custom-select">
+                        <option value="28">28 inch</option>
+                        <option value="30" selected>30 inch</option>
+                        <option value="32">32 inch</option>
+                        <option value="34">34 inch</option>
+                        <option value="36">36 inch</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Favorite Department</label>
+                      <select id="pref-favorite-dept" class="custom-select">
+                        <option value="women" selected>Women's Collection</option>
+                        <option value="men">Men's Collection</option>
+                        <option value="kids">Kids' Collection</option>
+                      </select>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary mt-12">Save Style Profile</button>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================== -->
+    <!-- 8. ABOUT US VIEW -->
+    <!-- ============================================== -->
+    <section class="app-view" id="about-view" style="display: none;">
+      <div class="container about-page-container">
+        
+        <!-- About Hero -->
+        <div class="about-hero-card">
+          <span class="sub-heading">THE STYLEHUB MANIFESTO</span>
+          <h1 class="about-title">Crafting Tomorrow's Classics with Sustainable Luxury</h1>
+          <p class="about-lead">Founded on the principle that true style transcends seasons, StyleHub unites Italian artisanal craftsmanship, ethical sourcing, and contemporary minimalist silhouettes.</p>
+        </div>
+
+        <!-- Story Section -->
+        <div class="about-story-grid">
+          <div class="story-image">
+            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1000&auto=format&fit=crop" alt="Fashion Atelier Studio">
+          </div>
+          <div class="story-text">
+            <span class="sub-heading">OUR ORIGINS</span>
+            <h2>From a Milanese Atelier to Global Wardrobes</h2>
+            <p>StyleHub was established with a singular obsession: eliminating the trade-off between uncompromising quality and accessible pricing. By working directly with heritage textile mills in Biella, Como, and Kyoto, we cut out intermediate markups and deliver masterwork garments directly to you.</p>
+            <p>Every pattern is drafted by hand, tested across diverse body archetypes, and finished with precision French seams and bespoke natural mother-of-pearl buttons.</p>
+            <div class="about-stats-row">
+              <div><strong>120+</strong> Artisan Tailors</div>
+              <div><strong>100%</strong> Carbon Offset</div>
+              <div><strong>45</strong> Countries Served</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sustainability & Ethics Pillar -->
+        <div class="sustainability-banner">
+          <div class="sustain-content">
+            <span class="sustain-badge">CIRCULAR FASHION</span>
+            <h2>Our Sustainability Commitment</h2>
+            <p>Fast fashion generates 92 million tons of textile waste annually. We actively reject this disposable culture.</p>
+            <div class="sustain-grid">
+              <div class="sustain-item">
+                <div class="sustain-icon">🌿</div>
+                <h4>100% Organic & Recycled</h4>
+                <p>We only use GOTS-certified organic cotton, cruelty-free peace silk, and recycled ocean polymers.</p>
+              </div>
+              <div class="sustain-item">
+                <div class="sustain-icon">💧</div>
+                <h4>Zero Hazardous Chemistry</h4>
+                <p>Our non-toxic, closed-loop dyeing processes recycle 98% of all water utilized in textile creation.</p>
+              </div>
+              <div class="sustain-item">
+                <div class="sustain-icon">🤝</div>
+                <h4>Living Wages Guaranteed</h4>
+                <p>Fair, safe, and empowering working conditions for every tailor, weaver, and artisan in our network.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Brand Values -->
+        <div class="brand-values-section">
+          <div class="section-header text-center">
+            <span class="sub-heading">FOUNDATIONAL PRINCIPLES</span>
+            <h2 class="section-title">The Four Pillars of StyleHub</h2>
+          </div>
+          <div class="values-grid">
+            <div class="value-card">
+              <div class="v-num">01</div>
+              <h3>Timeless Silhouette</h3>
+              <p>Garments created to be cherished for decades, defying fleeting micro-trends through balanced proportions.</p>
+            </div>
+            <div class="value-card">
+              <div class="v-num">02</div>
+              <h3>Textile Mastery</h3>
+              <p>Sourcing long-staple Egyptian cottons, heavy Mulberry silks, and ultrafine Merino wools for supreme skin feel.</p>
+            </div>
+            <div class="value-card">
+              <div class="v-num">03</div>
+              <h3>Radical Transparency</h3>
+              <p>Direct insight into our supply chain, materials origin, and transparent cost breakdowns on all apparel.</p>
+            </div>
+            <div class="value-card">
+              <div class="v-num">04</div>
+              <h3>Inclusive Fit Engineering</h3>
+              <p>Extensively calibrated sizing ranges designed to flatter and empower all silhouettes with confidence.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================== -->
+    <!-- 9. CONTACT US VIEW -->
+    <!-- ============================================== -->
+    <section class="app-view" id="contact-view" style="display: none;">
+      <div class="container contact-page-container">
+        
+        <div class="contact-header text-center">
+          <span class="sub-heading">GET IN TOUCH</span>
+          <h1 class="page-title">We'd Love to Hear From You</h1>
+          <p class="section-desc">Have a sizing question, order inquiry, or wholesale request? Our client concierge is available 24/7.</p>
+        </div>
+
+        <div class="contact-layout">
+          
+          <!-- Contact Form -->
+          <div class="contact-form-col">
+            <div class="contact-card">
+              <h3>Send Our Concierge a Message</h3>
+              <form id="contact-main-form" onsubmit="handleContactSubmit(event)">
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label for="contact-name">Your Full Name *</label>
+                    <input type="text" id="contact-name" required placeholder="Alexander Vance">
+                  </div>
+                  <div class="form-group">
+                    <label for="contact-email">Email Address *</label>
+                    <input type="email" id="contact-email" required placeholder="alexander@domain.com">
+                  </div>
+                </div>
+
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label for="contact-phone">Phone (Optional)</label>
+                    <input type="tel" id="contact-phone" placeholder="+1 (555) 000-0000">
+                  </div>
+                  <div class="form-group">
+                    <label for="contact-subject">Topic / Department *</label>
+                    <select id="contact-subject" class="custom-select">
+                      <option value="order">Order Tracking & Sizing</option>
+                      <option value="returns">Exchange or Return Inquiry</option>
+                      <option value="styling">Personal Styling Advice</option>
+                      <option value="wholesale">Bespoke & Wholesale</option>
+                      <option value="other">General Feedback</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="contact-message">Your Message *</label>
+                  <textarea id="contact-message" rows="5" required placeholder="How can our style advisors assist you today?"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg">Send Message</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Contact Details & Stores -->
+          <div class="contact-info-col">
+            <div class="contact-info-card">
+              <h3>Direct Support</h3>
+              
+              <div class="info-block">
+                <span class="info-icon">📞</span>
+                <div>
+                  <strong>Toll-Free Client Care</strong>
+                  <p>+1 (800) 555-STYLE (Mon–Sun: 8am–10pm EST)</p>
+                </div>
+              </div>
+
+              <div class="info-block">
+                <span class="info-icon">✉️</span>
+                <div>
+                  <strong>Email Inquiries</strong>
+                  <p>concierge@stylehub-fashion.com</p>
+                </div>
+              </div>
+
+              <div class="info-block">
+                <span class="info-icon">🏢</span>
+                <div>
+                  <strong>Global Headquarters</strong>
+                  <p>StyleHub Atelier, 450 Fashion Avenue, 18th Floor, New York, NY 10018</p>
+                </div>
+              </div>
+
+              <hr class="contact-divider">
+
+              <h3>Flagship Boutiques</h3>
+              <div class="boutiques-list">
+                <div class="boutique-item">
+                  <strong>New York Flagship:</strong> 720 Fifth Ave, Manhattan
+                </div>
+                <div class="boutique-item">
+                  <strong>Milan Atelier:</strong> Via Montenapoleone 14, Milan
+                </div>
+                <div class="boutique-item">
+                  <strong>Paris Boutique:</strong> 28 Rue du Faubourg Saint-Honoré, Paris
+                </div>
+                <div class="boutique-item">
+                  <strong>London Store:</strong> 150 New Bond Street, Mayfair, London
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- FAQ Accordion -->
+        <div class="faq-section">
+          <div class="section-header text-center">
+            <span class="sub-heading">FREQUENTLY ASKED QUESTIONS</span>
+            <h2 class="section-title">Everything You Need to Know</h2>
+          </div>
+
+          <div class="faq-accordion" id="faq-accordion">
+            <div class="faq-item active">
+              <button type="button" class="faq-question" onclick="toggleFaq(this)">
+                <span>What are your international shipping times and fees?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>We offer Free Standard Express Shipping on all global orders exceeding ₹1,499. Orders are packed within 24 hours and delivered in 2–4 business days with end-to-end simulated tracking.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button type="button" class="faq-question" onclick="toggleFaq(this)">
+                <span>How does your 30-day exchange and return policy work?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>If your garments do not fit flawlessly, simply initiate an exchange via your Account page or Contact form. Every shipment includes a prepaid return label. Items must be unworn with original tags attached.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button type="button" class="faq-question" onclick="toggleFaq(this)">
+                <span>How do I find my accurate size across different international standards?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>You can click on the "Size Guide" button on any product page to view our comprehensive measurement tables in both inches and centimeters for chest, waist, hips, and inseams.</p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button type="button" class="faq-question" onclick="toggleFaq(this)">
+                <span>Are the fabrics truly organic and ethically manufactured?</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p>Yes. 100% of our cotton is GOTS certified organic, our wool is humanely harvested via certified farms, and all partner ateliers adhere to strict living wage guarantees and waste water recycling protocols.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================== -->
+  <!-- MODALS & DRAWERS -->
+  <!-- ============================================== -->
+
+  <!-- 1. CART SLIDE-OVER DRAWER -->
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay" onclick="toggleCartDrawer()"></div>
+  <aside class="cart-drawer" id="cart-drawer">
+    <div class="drawer-header">
+      <div class="drawer-title-flex">
+        <h3>Shopping Bag</h3>
+        <span class="drawer-badge" id="drawer-cart-count">0 items</span>
+      </div>
+      <button type="button" class="close-btn" onclick="toggleCartDrawer()" aria-label="Close Shopping Bag">✕</button>
+    </div>
+
+    <!-- Drawer Items List -->
+    <div class="drawer-body" id="drawer-cart-items">
+      <!-- Injected via JS -->
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="drawer-footer" id="drawer-cart-footer">
+      <div class="drawer-summary-row">
+        <span>Subtotal</span>
+         <strong id="drawer-subtotal">₹0</strong>
+      </div>
+      <p class="drawer-shipping-note">Taxes & shipping calculated at checkout</p>
+      <button type="button" class="btn btn-primary btn-block btn-lg" onclick="toggleCartDrawer(); navigateTo('checkout');">
+        Checkout Now →
+      </button>
+      <button type="button" class="btn btn-outline btn-block mt-8" onclick="toggleCartDrawer(); navigateTo('cart');">
+        View Full Bag
+      </button>
+    </div>
+  </aside>
+
+
+  <!-- 2. WISHLIST MODAL -->
+  <div class="modal-backdrop" id="wishlist-modal-backdrop" onclick="closeWishlistModal()"></div>
+  <div class="custom-modal wishlist-modal" id="wishlist-modal">
+    <div class="modal-header">
+      <div class="modal-title-flex">
+        <h3>Your Saved Wishlist</h3>
+        <span class="modal-count-badge" id="modal-wishlist-count">0 items</span>
+      </div>
+      <button type="button" class="close-btn" onclick="closeWishlistModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="wishlist-items-grid" id="modal-wishlist-grid">
+        <!-- Rendered via JS -->
+      </div>
+      <div class="empty-state-card" id="wishlist-empty-state" style="display: none;">
+        <div class="empty-icon">🤍</div>
+        <h3>Your Wishlist is Empty</h3>
+        <p>Save items you love by tapping the heart icon on any garment to purchase later.</p>
+        <button type="button" class="btn btn-primary" onclick="closeWishlistModal(); filterShopCategory('all');">
+          Browse All Styles
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 3. QUICK VIEW MODAL -->
+  <div class="modal-backdrop" id="quick-view-backdrop" onclick="closeQuickViewModal()"></div>
+  <div class="custom-modal quick-view-modal" id="quick-view-modal">
+    <button type="button" class="close-btn modal-close-corner" onclick="closeQuickViewModal()">✕</button>
+    <div class="quick-view-layout" id="quick-view-content">
+      <!-- Populated via JS -->
+    </div>
+  </div>
+
+
+  <!-- 4. SIZE GUIDE MODAL -->
+  <div class="modal-backdrop" id="size-guide-backdrop" onclick="closeSizeGuideModal()"></div>
+  <div class="custom-modal size-guide-modal" id="size-guide-modal">
+    <div class="modal-header">
+      <h3>StyleHub Comprehensive Sizing Chart</h3>
+      <button type="button" class="close-btn" onclick="closeSizeGuideModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <p>Measurements are provided in standard inches (and centimeters) to help you choose the best fit.</p>
+      
+      <div class="size-table-wrapper">
+        <table class="size-table">
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>US / UK</th>
+              <th>Bust / Chest (in)</th>
+              <th>Waist (in)</th>
+              <th>Hips (in)</th>
+              <th>Length (in)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>XS</strong></td>
+              <td>0–2 / 4–6</td>
+              <td>32–33" (82cm)</td>
+              <td>24–25" (62cm)</td>
+              <td>34–35" (88cm)</td>
+              <td>42"</td>
+            </tr>
+            <tr>
+              <td><strong>S</strong></td>
+              <td>4–6 / 8–10</td>
+              <td>34–35" (88cm)</td>
+              <td>26–27" (68cm)</td>
+              <td>36–37" (93cm)</td>
+              <td>43"</td>
+            </tr>
+            <tr>
+              <td><strong>M</strong></td>
+              <td>8–10 / 12–14</td>
+              <td>36–37" (93cm)</td>
+              <td>28–29" (74cm)</td>
+              <td>38–39" (98cm)</td>
+              <td>44"</td>
+            </tr>
+            <tr>
+              <td><strong>L</strong></td>
+              <td>12–14 / 16–18</td>
+              <td>38–40" (99cm)</td>
+              <td>30–32" (80cm)</td>
+              <td>40–42" (104cm)</td>
+              <td>45"</td>
+            </tr>
+            <tr>
+              <td><strong>XL</strong></td>
+              <td>16–18 / 20–22</td>
+              <td>41–43" (107cm)</td>
+              <td>33–35" (87cm)</td>
+              <td>43–45" (112cm)</td>
+              <td>46"</td>
+            </tr>
+            <tr>
+              <td><strong>XXL</strong></td>
+              <td>20+ / 24+</td>
+              <td>44–46" (115cm)</td>
+              <td>36–38" (95cm)</td>
+              <td>46–48" (120cm)</td>
+              <td>47"</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="size-measuring-tips">
+        <h4>How to Measure Accurately</h4>
+        <ul>
+          <li><strong>Chest / Bust:</strong> Measure around the fullest part of your chest, keeping the tape horizontal.</li>
+          <li><strong>Waist:</strong> Measure around your natural waistline (narrowest part of the torso).</li>
+          <li><strong>Hips:</strong> Stand with feet together and measure around the fullest point of your hips.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 5. AUTH / LOGIN / REGISTER MODAL -->
+  <div class="modal-backdrop" id="auth-modal-backdrop" onclick="closeAuthModal()"></div>
+  <div class="custom-modal auth-modal" id="auth-modal">
+    <button type="button" class="close-btn modal-close-corner" onclick="closeAuthModal()">✕</button>
+    <div class="auth-tabs">
+      <button type="button" class="auth-tab-btn active" id="tab-login-btn" onclick="switchAuthTab('login')">Sign In</button>
+      <button type="button" class="auth-tab-btn" id="tab-register-btn" onclick="switchAuthTab('register')">Register Account</button>
+    </div>
+
+    <!-- Login Panel -->
+    <div class="auth-panel active" id="auth-login-panel">
+      <form id="login-form" onsubmit="handleLoginSubmit(event)">
+        <div class="form-group">
+          <label for="login-email">Email Address</label>
+          <input type="email" id="login-email" required placeholder="jane.doe@example.com">
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg mt-16">Sign In to StyleHub</button>
+        <p class="small-hint text-center mt-12">Simulated account session for easy demo evaluation.</p>
+      </form>
+    </div>
+
+    <!-- Register Panel -->
+    <div class="auth-panel" id="auth-register-panel" style="display: none;">
+      <form id="register-form" onsubmit="handleRegisterSubmit(event)">
+        <div class="form-group">
+          <label for="reg-name">Full Name</label>
+          <input type="text" id="reg-name" required placeholder="Sarah Jenkins">
+        </div>
+        <div class="form-group">
+          <label for="reg-email">Email Address</label>
+          <input type="email" id="reg-email" required placeholder="sarah@example.com">
+        </div>
+        <div class="form-group">
+          <label for="reg-password">Create Password</label>
+          <input type="password" id="reg-password" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg mt-16">Create VIP Account</button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- 6. ADD ADDRESS MODAL -->
+  <div class="modal-backdrop" id="address-modal-backdrop" onclick="closeAddressModal()"></div>
+  <div class="custom-modal address-modal" id="address-modal">
+    <div class="modal-header">
+      <h3>Add New Delivery Address</h3>
+      <button type="button" class="close-btn" onclick="closeAddressModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="new-address-form" onsubmit="handleNewAddressSubmit(event)">
+        <div class="form-group">
+          <label for="new-addr-label">Address Tag (e.g. Home, Office)</label>
+          <input type="text" id="new-addr-label" required placeholder="Home Penthouse">
+        </div>
+        <div class="form-group">
+          <label for="new-addr-street">Street & Number</label>
+          <input type="text" id="new-addr-street" required placeholder="124 Grand Street, Apt 6">
+        </div>
+        <div class="form-grid-3">
+          <div class="form-group">
+            <label for="new-addr-city">City</label>
+            <input type="text" id="new-addr-city" required placeholder="New York">
+          </div>
+          <div class="form-group">
+            <label for="new-addr-state">State</label>
+            <input type="text" id="new-addr-state" required placeholder="NY">
+          </div>
+          <div class="form-group">
+            <label for="new-addr-zip">Pincode</label>
+            <input type="text" id="new-addr-zip" required placeholder="10013">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mt-16">Save Address</button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+
+  <!-- ============================================== -->
+  <!-- GLOBAL FOOTER -->
+  <!-- ============================================== -->
+  <footer class="main-footer">
+    <div class="container footer-grid">
+      
+      <!-- Col 1: Brand Info -->
+      <div class="footer-col brand-col">
+        <a href="#" class="brand-logo footer-logo" onclick="navigateTo('home'); return false;">
+          <span class="logo-accent">STYLE</span>HUB
+          <span class="logo-dot"></span>
+        </a>
+        <p class="footer-tagline">
+          Elevated fashion, mindful tailoring, and sustainable luxury curated for discerning wardrobes worldwide.
+        </p>
+        <div class="footer-social-links">
+          <a href="#" class="social-icon" aria-label="Instagram">📸</a>
+          <a href="#" class="social-icon" aria-label="Pinterest">📌</a>
+          <a href="#" class="social-icon" aria-label="Facebook">📘</a>
+          <a href="#" class="social-icon" aria-label="Twitter">🐦</a>
+        </div>
+      </div>
+
+      <!-- Col 2: Shop Links -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Collections</h4>
+        <ul class="footer-links-list">
+          <li><a href="#" onclick="filterShopCategory('women'); return false;">Women's Haute Edit</a></li>
+          <li><a href="#" onclick="filterShopCategory('men'); return false;">Men's Sartorial Line</a></li>
+          <li><a href="#" onclick="filterShopCategory('kids'); return false;">Kids & Toddlers Outfits</a></li>
+          <li><a href="#" onclick="filterShopCategory('all'); return false;">New Season Arrivals</a></li>
+          <li><a href="#" onclick="filterShopCategory('all'); return false;">Special Edition Knits</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Customer Care -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Client Services</h4>
+        <ul class="footer-links-list">
+          <li><a href="#" onclick="navigateTo('account'); setAccountTab('orders'); return false;">Track Your Parcel</a></li>
+          <li><a href="#" onclick="openSizeGuideModal(); return false;">Interactive Size Guide</a></li>
+          <li><a href="#" onclick="navigateTo('contact'); return false;">Returns & Exchanges</a></li>
+          <li><a href="#" onclick="navigateTo('contact'); return false;">Customer Concierge</a></li>
+          <li><a href="#" onclick="navigateTo('account'); return false;">VIP Rewards Portal</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: About & Ethics -->
+      <div class="footer-col">
+        <h4 class="footer-heading">The House</h4>
+        <ul class="footer-links-list">
+          <li><a href="#" onclick="navigateTo('about'); return false;">Our Atelier Story</a></li>
+          <li><a href="#" onclick="navigateTo('about'); return false;">Sustainable Materials</a></li>
+          <li><a href="#" onclick="navigateTo('contact'); return false;">Flagship Store Locator</a></li>
+          <li><a href="#" onclick="navigateTo('about'); return false;">Craftsmanship Standards</a></li>
+          <li><a href="#" onclick="navigateTo('contact'); return false;">Press & Careers</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom Footer Bar -->
+    <div class="footer-bottom-bar">
+      <div class="container footer-bottom-inner">
+        <p>© 2026 StyleHub Fashion & Apparel Inc. All rights reserved.</p>
+        <div class="payment-badges-row">
+          <span class="pay-badge">💳 VISA</span>
+          <span class="pay-badge">💳 MasterCard</span>
+          <span class="pay-badge">💳 AMEX</span>
+          <span class="pay-badge">📱 Apple Pay</span>
+          <span class="pay-badge">📱 UPI / QR</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MAIN SCRIPT -->
+  <script src="script.js"></script>
+</body>
+</html>
