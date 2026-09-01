@@ -28,7 +28,7 @@ https://youtu.be/XcyylkL_ovs?si=VHIOID_G_Fky4-_G
 
 The complete internship project report is available below:
 
-[View Project Report](./StyleHub_Project_Report.pdf)
+[View Project Report](https://github.com/ganeshmamidi07-bot/StyleHub-Fashion-Ecommerce/blob/2f0b16f54499df18fbafa3e46ca257f477218478/index.html)
 
 ---
 
